@@ -57,19 +57,19 @@ function App() {
       <h1 className='winner'>{winner}</h1>
       <div className='grids'>
       <div className="row1">
-        <div className='cell0' onClick={() => {handleChanges(0);}}>{gridCells[0].marker}</div>
-        <div className='cell1' onClick={() => {handleChanges(1);}}>{gridCells[1].marker}</div>
-        <div className='cell2'onClick={() => {handleChanges(2);}}>{gridCells[2].marker}</div>
+        <div className='cell0' onClick={() => {handleChanges(0)}}>{gridCells[0].marker}</div>
+        <div className='cell1' onClick={() => {handleChanges(1)}}>{gridCells[1].marker}</div>
+        <div className='cell2'onClick={() => {handleChanges(2)}}>{gridCells[2].marker}</div>
       </div>
       <div className="row2">
-        <div className='cell3'onClick={() => {handleChanges(3);}}>{gridCells[3].marker}</div>
-        <div className='cell4'onClick={() => {handleChanges(4);}}>{gridCells[4].marker}</div>
-        <div className='cell5'onClick={() => {handleChanges(5);}}>{gridCells[5].marker}</div>
+        <div className='cell3'onClick={() => {handleChanges(3)}}>{gridCells[3].marker}</div>
+        <div className='cell4'onClick={() => {handleChanges(4)}}>{gridCells[4].marker}</div>
+        <div className='cell5'onClick={() => {handleChanges(5)}}>{gridCells[5].marker}</div>
       </div>
       <div className="row3">
-        <div className='cell6'onClick={() => {handleChanges(6);}}>{gridCells[6].marker}</div>
-        <div className='cell7'onClick={() => {handleChanges(7);}}>{gridCells[7].marker}</div>
-        <div className='cell8'onClick={() => {handleChanges(8);}}>{gridCells[8].marker}</div>
+        <div className='cell6'onClick={() => {handleChanges(6)}}>{gridCells[6].marker}</div>
+        <div className='cell7'onClick={() => {handleChanges(7)}}>{gridCells[7].marker}</div>
+        <div className='cell8'onClick={() => {handleChanges(8)}}>{gridCells[8].marker}</div>
       </div>
       <div className='reset' id='reset'>
         <button onClick={reset}>RESET</button>
