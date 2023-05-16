@@ -1,14 +1,26 @@
 import './index.css';
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 function App() {
   const [player, setPlayer] = useState(1);
   const [winner, setWinner] = useState("");
   const [gameOver, setGameOver] = useState(false);
+  const [count,setCount] = useState(0);
+  const [showAlert, setShowAlert] = useState(false);
+
 
   const [gridCells, setGridCells] = useState(Array(9).fill({ marker: "", visited: false }));
 
+  function Alert() {
+    return (
+      <p className="alert-message">Game over! Click Reset to play another game.</p>
+    );
+  }
+
   function handleChanges(index) {
+    if(gameOver) {
+      setShowAlert(true);
+    }
     if (!gridCells[index].visited && !gameOver) {
       const newMarker = player === 1 ? "X" : "O";
       const newGridCells = [...gridCells];
@@ -19,8 +31,16 @@ function App() {
       setGridCells(newGridCells);
       setPlayer(player === 1 ? 2 : 1);
       checkWinner(index, newMarker);
+      setCount(count+1);
     }
   }
+  useEffect(() => {
+    if (count === 9 && winner !== "X wins!!" && winner !== "O wins!!") {
+      setWinner("It's a DRAW!!");
+      setGameOver(true);
+      setCount(0);
+    }
+  }, [count, winner]);  
 
   const winningCombos = {};
   winningCombos[1] = [[2, 3], [4, 7], [5, 9]];
@@ -34,12 +54,12 @@ function App() {
   winningCombos[9] = [[3, 6], [1, 5], [7, 8]];
 
   function checkWinner (index, currMarker){
-
     for(let i =0;i<winningCombos[index+1].length;i++) {
       let id1 = winningCombos[index+1][i][0]-1;
       let id2 = winningCombos[index+1][i][1]-1;
       if((gridCells[id1].marker === currMarker) && (gridCells[id2].marker === currMarker)) {
         setWinner(`${currMarker} wins!!`);
+        setCount(0);
         setGameOver(true);
       }
     }
@@ -50,11 +70,18 @@ function App() {
     setPlayer(1);
     setWinner("");
     setGameOver(false);
+    setCount(0);
+    setShowAlert(false);
   }
   
   return (
     <div className="App">
       <h1 className='winner'>{winner}</h1>
+      {showAlert && gameOver && (
+        <Alert
+          message="Game over! Click Reset to play another game!"
+        />
+      )}
       <div className='grids'>
       <div className="row1">
         <div className='cell0' onClick={() => {handleChanges(0)}}>{gridCells[0].marker}</div>
